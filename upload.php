@@ -4,6 +4,9 @@ $uploadDir = 'uploads/';
 $uploaded = array();
 $failed = array();
 
+
+
+
 if (!empty($_FILES['avatar']['name'])) {
     $files = $_FILES['avatar'];
     $allowed = array('png','gif','jpg');
@@ -68,16 +71,20 @@ if (!empty($_FILES['avatar']['name'])) {
     </form>
         <div id="fileinfo">
             <?php $it = new FilesystemIterator($uploadDir);
-            foreach ($it as $files => $file) :?>
-                <form action="upload.php">
-                    <figure>
-                        <img src="<?= $files ?>" alt="">
-                        <figcaption><?= $files ?></figcaption>
-                    </figure>
-                    <button>Delete</button>
-                </form>
+            foreach ($it as $files ) :?>
+
+            <form  method="post" action="delete.php">
+                <figure>
+                    <img src="<?= $files ?>" alt="">
+                    <figcaption><?= $files ?></figcaption>
+                </figure>
+                <button type="submit" name="<?= $files ?>" value="<?= $files ?>">Delete</button>
+
+            </form>
 
             <?php endforeach; ?>
+
+
 
 </body>
 </html>
